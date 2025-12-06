@@ -1,71 +1,362 @@
-<!-- Login Page -->
-<div id="login-page" class="page active">
-    <div class="login-container">
-        <div class="logo">
-            <i class="fas fa-book-reader"></i>
-            <h1>Reading Platform</h1>
-            <p class="subtitle">Learn English through interesting articles</p>
-        </div>
-        
-        <form id="login-form" class="checklist-form">
-            <!-- Field 1: Name -->
-            <div class="checklist-item">
-                <div class="checklist-header">
-                    <span class="checkbox unchecked">☐</span>
-                    <label for="name" class="checklist-label">Name</label>
-                </div>
-                <input type="text" 
-                       id="name" 
-                       class="checklist-input"
-                       placeholder="Type your name"
-                       required>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Platform | Article 12</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .hidden { display: none !important; }
+        .page { min-height: 100vh; }
+        .active { display: block; }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="page active">
+        <div class="login-container">
+            <div class="logo">
+                <i class="fas fa-book-reader"></i>
+                <h1>Reading Platform</h1>
+                <p class="subtitle">Learn English through interesting articles</p>
             </div>
             
-            <!-- Field 2: Surname -->
-            <div class="checklist-item">
-                <div class="checklist-header">
-                    <span class="checkbox checked">☑</span>
-                    <label for="surname" class="checklist-label">Surname</label>
+            <form id="login-form" class="checklist-form">
+                <!-- Name Field -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <span class="checkbox unchecked">☐</span>
+                        <label for="name" class="checklist-label">Name</label>
+                    </div>
+                    <input type="text" id="name" class="checklist-input" placeholder="Type your name" required>
                 </div>
-                <input type="text" 
-                       id="surname" 
-                       class="checklist-input"
-                       placeholder="Type your surname"
-                       required>
-            </div>
-            
-            <!-- Field 3: Group (MANUAL INPUT) -->
-            <div class="checklist-item">
-                <div class="checklist-header">
-                    <span class="checkbox checked">☑</span>
-                    <label for="group" class="checklist-label">Group</label>
+                
+                <!-- Surname Field -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <span class="checkbox checked">☑</span>
+                        <label for="surname" class="checklist-label">Surname</label>
+                    </div>
+                    <input type="text" id="surname" class="checklist-input" placeholder="Type your surname" value="Doe" required>
                 </div>
-                <input type="text" 
-                       id="group" 
-                       class="checklist-input"
-                       placeholder="Type your group (e.g., A1, B2, etc.)"
-                       required>
-                <small class="input-hint">Example: A1, A2, B1, B2, C1, C2</small>
-            </div>
-            
-            <!-- Field 4: Time (Auto-filled) -->
-            <div class="checklist-item">
-                <div class="checklist-header">
-                    <span class="checkbox unchecked">☐</span>
-                    <label class="checklist-label">Time</label>
+                
+                <!-- Group Field (TEXT INPUT) -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <span class="checkbox checked">☑</span>
+                        <label for="group" class="checklist-label">Group</label>
+                    </div>
+                    <input type="text" id="group" class="checklist-input" placeholder="Type your group (e.g., A1)" value="A1" required>
+                    <small class="input-hint">Examples: A1, A2, B1, B2, C1, C2</small>
                 </div>
-                <div id="current-time" class="time-display">Loading time...</div>
-                <small class="input-hint">Automatically set</small>
-            </div>
+                
+                <!-- Time Field -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <span class="checkbox unchecked">☐</span>
+                        <label class="checklist-label">Time</label>
+                    </div>
+                    <div id="current-time" class="time-display">Loading time...</div>
+                    <small class="input-hint">Automatically set</small>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-submit">
+                    <i class="fas fa-sign-in-alt"></i> Enter Platform
+                </button>
+            </form>
             
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-submit">
-                <i class="fas fa-sign-in-alt"></i> Enter Platform
-            </button>
-        </form>
-        
-        <div class="footer-note">
-            <p><i class="fas fa-info-circle"></i> Your progress will be saved automatically</p>
+            <div class="footer-note">
+                <p><i class="fas fa-info-circle"></i> Your progress will be saved automatically</p>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="page hidden">
+        <header class="header">
+            <div class="user-info">
+                <div class="avatar">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div>
+                    <h3 id="user-name">User Name</h3>
+                    <p id="user-group">Group: A1</p>
+                </div>
+            </div>
+            
+            <div class="header-controls">
+                <div class="progress-badge">
+                    <i class="fas fa-trophy"></i>
+                    <span>Progress: <span id="progress-percent">0%</span></span>
+                </div>
+                <button id="logout-btn" class="btn btn-secondary">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <main class="main-container">
+            <!-- Progress Section -->
+            <section class="section">
+                <h2><i class="fas fa-chart-line"></i> Your Learning Progress</h2>
+                <div class="progress-container">
+                    <div class="progress-chart">
+                        <canvas id="progress-chart" width="400" height="200"></canvas>
+                    </div>
+                    
+                    <div class="progress-stats">
+                        <div class="stat-box">
+                            <div class="stat-icon" style="background: #4CAF50;">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Completed</h4>
+                                <p id="completed-count">0 articles</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-box">
+                            <div class="stat-icon" style="background: #2196F3;">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Average Score</h4>
+                                <p id="average-score">0%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-box">
+                            <div class="stat-icon" style="background: #FF9800;">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Time Spent</h4>
+                                <p id="time-spent">0 min</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Articles Grid -->
+            <section class="section">
+                <h2><i class="fas fa-book-open"></i> Reading Articles</h2>
+                <div class="articles-grid" id="articles-grid">
+                    <!-- Articles will be loaded here -->
+                </div>
+            </section>
+
+            <!-- General Tests -->
+            <section class="section">
+                <h2><i class="fas fa-graduation-cap"></i> General Tests</h2>
+                <p class="section-subtitle">Test your overall English knowledge</p>
+                
+                <div class="test-levels">
+                    <div class="level-card amateur">
+                        <div class="level-header">
+                            <div class="level-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h3>Amateur</h3>
+                        </div>
+                        <div class="level-content">
+                            <p><i class="fas fa-question-circle"></i> 25 Questions</p>
+                            <p><i class="fas fa-chart-bar"></i> Basic Level</p>
+                            <button class="btn btn-start-test" data-level="amateur">
+                                Start Test
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="level-card master">
+                        <div class="level-header">
+                            <div class="level-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3>Master</h3>
+                        </div>
+                        <div class="level-content">
+                            <p><i class="fas fa-question-circle"></i> 35 Questions</p>
+                            <p><i class="fas fa-chart-bar"></i> Intermediate Level</p>
+                            <button class="btn btn-start-test" data-level="master">
+                                Start Test
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="level-card epic">
+                        <div class="level-header">
+                            <div class="level-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h3>Epic</h3>
+                        </div>
+                        <div class="level-content">
+                            <p><i class="fas fa-question-circle"></i> 45 Questions</p>
+                            <p><i class="fas fa-chart-bar"></i> Advanced Level</p>
+                            <button class="btn btn-start-test" data-level="epic">
+                                Start Test
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="level-card titan">
+                        <div class="level-header">
+                            <div class="level-icon">
+                                <i class="fas fa-dragon"></i>
+                            </div>
+                            <h3>Titan</h3>
+                        </div>
+                        <div class="level-content">
+                            <p><i class="fas fa-question-circle"></i> 60 Questions</p>
+                            <p><i class="fas fa-chart-bar"></i> Expert Level</p>
+                            <button class="btn btn-start-test" data-level="titan">
+                                Start Test
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Article Reading Page -->
+    <div id="article-page" class="page hidden">
+        <header class="article-header">
+            <button id="back-to-menu" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <div class="article-title">
+                <h1>Article 12: US Population Reaches 300 Million</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-clock"></i> Reading time: 5 min</span>
+                    <span><i class="fas fa-chart-line"></i> Level: Intermediate</span>
+                    <span><i class="fas fa-star"></i> Your score: <span id="article-score">Not attempted</span></span>
+                </div>
+            </div>
+        </header>
+
+        <div class="article-content">
+            <!-- Left Column - Reading Passage -->
+            <div class="reading-column">
+                <div class="reading-card">
+                    <h2><i class="fas fa-scroll"></i> Reading Passage</h2>
+                    <div class="reading-text" id="reading-text">
+                        <!-- Article content will be here -->
+                    </div>
+                </div>
+                
+                <div class="vocabulary-card">
+                    <h3><i class="fas fa-book"></i> Key Vocabulary</h3>
+                    <div class="vocabulary-list" id="vocabulary-list">
+                        <!-- Vocabulary will be here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column - Quizzes -->
+            <div class="quiz-column">
+                <div class="quiz-header">
+                    <h2><i class="fas fa-brain"></i> Test Your Knowledge</h2>
+                    <div class="quiz-tabs">
+                        <button class="quiz-tab active" data-quiz="comprehension">
+                            <i class="fas fa-puzzle-piece"></i> Comprehension
+                        </button>
+                        <button class="quiz-tab" data-quiz="english-uzbek">
+                            <i class="fas fa-language"></i> English-Uzbek
+                        </button>
+                        <button class="quiz-tab" data-quiz="uzbek-english">
+                            <i class="fas fa-exchange-alt"></i> Uzbek-English
+                        </button>
+                        <button class="quiz-tab" data-quiz="gap-filling">
+                            <i class="fas fa-edit"></i> Gap Filling
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Quiz Container -->
+                <div class="quiz-container">
+                    <div class="quiz-info">
+                        <div class="quiz-title" id="quiz-title">Comprehension Quiz</div>
+                        <div class="quiz-stats">
+                            <span id="question-counter">Question 1/5</span>
+                            <span id="quiz-timer"><i class="fas fa-clock"></i> 10:00</span>
+                            <span id="quiz-score">Score: 0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-container" id="question-container">
+                        <!-- Questions will appear here -->
+                    </div>
+                    
+                    <div class="quiz-controls">
+                        <button id="prev-btn" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button id="next-btn" class="btn btn-primary">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button id="submit-quiz-btn" class="btn btn-success hidden">
+                            <i class="fas fa-paper-plane"></i> Submit Quiz
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results Display -->
+                <div class="results-container hidden" id="results-container">
+                    <div class="results-header">
+                        <div class="results-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h2>Quiz Completed!</h2>
+                    </div>
+                    
+                    <div class="results-content">
+                        <div class="score-display">
+                            <div class="score-circle">
+                                <span id="final-score">0</span>
+                                <small>/5</small>
+                            </div>
+                            <div class="score-details">
+                                <p><i class="fas fa-check"></i> Correct: <span id="correct-count">0</span></p>
+                                <p><i class="fas fa-times"></i> Wrong: <span id="wrong-count">0</span></p>
+                                <p><i class="fas fa-percentage"></i> Percentage: <span id="score-percent">0%</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="results-actions">
+                            <button id="review-btn" class="btn btn-secondary">
+                                <i class="fas fa-search"></i> Review Answers
+                            </button>
+                            <button id="try-again-btn" class="btn btn-primary">
+                                <i class="fas fa-redo"></i> Try Again
+                            </button>
+                            <button id="send-to-telegram" class="btn btn-success">
+                                <i class="fab fa-telegram"></i> Send to Teacher
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div id="notification-container"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden">
+        <div class="loading-content">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
