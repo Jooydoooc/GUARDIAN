@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/api/telegram.js",
+      "src": "api/telegram.js",
       "use": "@vercel/node"
     },
     {
@@ -13,15 +13,14 @@
   "routes": [
     {
       "src": "/api/telegram",
-      "dest": "/src/api/telegram.js"
+      "dest": "/api/telegram.js",
+      "methods": ["POST"]
     },
     {
       "src": "/(.*)",
       "dest": "/public/index.html"
     }
   ],
-  "env": {
-    "TELEGRAM_BOT_TOKEN": "@telegram-bot-token",
-    "TELEGRAM_CHAT_ID": "@telegram-chat-id"
-  }
+  "buildCommand": null,
+  "outputDirectory": "public"
 }
