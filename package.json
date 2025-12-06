@@ -1,18 +1,13 @@
 {
   "name": "reading-platform",
   "version": "1.0.0",
-  "description": "Simple reading platform for students",
+  "description": "Modern English learning platform with interactive articles",
   "main": "public/index.html",
   "scripts": {
-    "start": "echo 'Open public/index.html in browser'",
-    "dev": "echo 'Development mode'"
+    "start": "echo 'Open public/index.html in your browser'",
+    "dev": "echo 'Running in development mode'"
   },
-  "dependencies": {
-    "express": "^4.18.2",
-    "axios": "^1.6.0",
-    "dotenv": "^16.3.1",
-    "cors": "^2.8.5"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "engines": {
     "node": ">=14.0.0"
