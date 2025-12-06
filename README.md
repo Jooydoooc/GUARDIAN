@@ -1,4 +1,4 @@
-# Reading Platform
+# GUARDIAN
 
 A simple web platform for students to practice English reading comprehension.
 
